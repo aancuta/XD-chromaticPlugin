@@ -1,0 +1,42 @@
+{
+    "id": "Chromatic Gradients",
+    "version": "1.0",
+    "name": "Chromatic Gradients",
+
+    "host": {
+        "app": "XD",
+        "minVersion": "8.0"
+    },
+
+    "uiEntryPoints": [
+        {
+            "type": "menu",
+	    "label": "Chromatic Gradients",
+	    "menuItems": [
+                {
+                    "type": "menu",
+                    "label": "LAB Gradient",
+                    "commandId": "labGradient"
+                },
+        
+                {
+                    "type": "menu",
+                    "label": "LRGB Gradient",
+                    "commandId": "lrgbGradient"
+                },
+        
+                {
+                    "type": "menu",
+                    "label": "LCH Gradient",
+                    "commandId": "lchGradient"
+                },
+        
+                {
+                    "type": "menu",
+                    "label": "Revert to RGB Gradient",
+                    "commandId": "undoChromaticGradient"
+                }
+	    ]
+	}
+   ]
+}
