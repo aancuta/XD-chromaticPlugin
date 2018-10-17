@@ -7,7 +7,7 @@ module.exports = {
   entry: './gradient.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'Chromatic Gradients'),
+    path: path.resolve(__dirname, 'a1962491'),
   },
   target: 'node',
   externals: {

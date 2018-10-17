@@ -10,8 +10,8 @@
     "webpack-cli": "^3.1.0"
   },
   "scripts": {
-    "zip": "webpack -p && zip -r 'Chromatic Gradients.xdx' 'Chromatic Gradients'",
-    "clean": "rm -rf 'node_modules' 'Chromatic Gradients.xdx' 'Chromatic Gradients/main.js'",
+    "zip": "webpack -p && zip -r 'a1962491.xdx' 'a1962491'",
+    "clean": "rm -rf 'node_modules' 'a1962491.xdx' 'a1962491/main.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
