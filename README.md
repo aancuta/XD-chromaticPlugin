@@ -3,6 +3,9 @@
 This XD plugin lets you create an approximation of a gradient in other color spaces, like LAB.
 It is using the [chroma-js](https://github.com/gka/chroma.js/) JavaScript color manipulation library to add more color stops to your gradients.
 
+# Preview
+![Preview](a1962491/icon.png)
+
 # Prerequisites
 [Adobe XD](https://www.adobe.com/products/xd.html) and [Node.js and NPM](https://www.npmjs.com/get-npm)
 
