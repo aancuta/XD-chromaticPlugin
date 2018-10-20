@@ -138,15 +138,24 @@ function addColorStops(colorStopArray, mode) {
 }
 
 function chromaticGradientWrapper(selection, mode) {
-    let firstSelectionItem = selection.items[0],
-        oldFill            = firstSelectionItem.fill,
-        gradient           = oldFill.clone(),
-        colorStops         = gradient.colorStops,
-        newColorStops      = addColorStops(colorStops, mode);
+    for (var i = 0; i < selection.items.length; ++i) {
+        try {
+            // wrapping all this in a try block (e.g. Could have some text box in the selection which would throw
+            // because it doesn't have a fill property. This way, it just gets ignored.)
+            let firstSelectionItem = selection.items[i],
+                oldFill            = firstSelectionItem.fill,
+                gradient           = oldFill.clone(),
+                colorStops         = gradient.colorStops,
+                newColorStops      = addColorStops(colorStops, mode);
 
-    // XD API for gradient replacement from plugins
-    gradient.colorStops = newColorStops;
-    selection.items[0].fill = gradient;
+            // XD API for gradient replacement from plugins
+            gradient.colorStops = newColorStops;
+            selection.items[i].fill = gradient;
+        } catch (err) {
+            // Preserve the JS logs though
+            console.log(err);
+        }
+    }
 }
 
 function undoChromaticGradient(selection) {
