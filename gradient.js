@@ -38,10 +38,9 @@ function getDialog() {
             h("dialog",
                 h("form", { style: { width: 360 } },
                     h("h1", "Chromatic Gradients Plugin"),
+                    h("hr", ""),
                     h("p", ""),
                     h("p", "Please select at least one shape with a gradient fill."),
-                    h("p", ""),
-                    h("p", ""),
                     h("p", ""),
                     h("footer",
                         h("button", { uxpVariant:"cta", type:"submit", onclick() { dialog.close() } }, "OK")
