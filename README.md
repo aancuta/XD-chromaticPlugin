@@ -21,3 +21,9 @@ Step by step:
 1. [Create your gradient in XD](https://helpx.adobe.com/xd/help/gradients.html)
 2. Having your gradient selected, go to the `Plugins` menu and select your prefered gradient color space
 3. You can always go back to your original gradient with the `Revert to RGB Gradient` option from the `Plugin` menu, even between different XD sessions
+
+
+# Usage example
+![1](usage_example/1.png)
+![1](usage_example/2.png)
+![1](usage_example/3.png)
