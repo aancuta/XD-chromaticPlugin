@@ -1,6 +1,6 @@
 {
   "name": "chromatic",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "XD plugin for creating gradients in other color spaces",
   "main": "gradient.js",
   "dependencies": {},
