@@ -1,5 +1,56 @@
 
 import chroma from "chroma-js";
+/**
+* Shorthand for creating Elements.
+* @param {*} tag The tag name of the element.
+* @param {*} [props] Optional props.
+* @param {*} children Child elements or strings
+*/
+function h(tag, props, ...children) {
+    let element = document.createElement(tag);
+    if (props) {
+        if (props.nodeType || typeof props !== "object") {
+            children.unshift(props);
+        }
+        else {
+            for (let name in props) {
+                let value = props[name];
+                if (name == "style") {
+                    Object.assign(element.style, value);
+                }
+                else {
+                    element.setAttribute(name, value);
+                    element[name] = value;
+                }
+            }
+        }
+    }
+    for (let child of children) {
+        element.appendChild(typeof child === "object" ? child : document.createTextNode(child));
+    }
+    return element;
+}
+
+let dialog;
+function getDialog() {
+    if (dialog == null) {
+        dialog =
+            h("dialog",
+                h("form", { style: { width: 360 } },
+                    h("h1", "Chromatic Gradients Plugin"),
+                    h("p", ""),
+                    h("p", "Please select at least one shape with a gradient fill."),
+                    h("p", ""),
+                    h("p", ""),
+                    h("p", ""),
+                    h("footer",
+                        h("button", { uxpVariant:"cta", type:"submit", onclick() { dialog.close() } }, "OK")
+                    )
+                )
+            )
+    }
+    return dialog;
+}
 
 // use powers of 2 for float precision
 const DELTA_STOP = 1 / 1024;
@@ -138,6 +189,8 @@ function addColorStops(colorStopArray, mode) {
 }
 
 function chromaticGradientWrapper(selection, mode) {
+    let errorCount = 0;
+
     for (var i = 0; i < selection.items.length; ++i) {
         try {
             // wrapping all this in a try block (e.g. Could have some text box in the selection which would throw
@@ -153,20 +206,39 @@ function chromaticGradientWrapper(selection, mode) {
             selection.items[i].fill = gradient;
         } catch (err) {
             // Preserve the JS logs though
+            errorCount += 1;
             console.log(err);
         }
+    }
+
+    if (errorCount === selection.items.length) {
+        document.body.appendChild(getDialog()).showModal();
     }
 }
 
 function undoChromaticGradient(selection) {
-    let firstSelectionItem = selection.items[0],
-        oldFill            = firstSelectionItem.fill,
-        gradient           = oldFill.clone(),
-        colorStops         = gradient.colorStops,
-        newColorStops      = colorStops.filter(x => !chromaticPluginStops.includes(x.stop));
+    let errorCount = 0;
 
-    gradient.colorStops = newColorStops;
-    selection.items[0].fill = gradient;
+    for (var i = 0; i < selection.items.length; ++i) {
+        try {
+            let firstSelectionItem = selection.items[i],
+                oldFill            = firstSelectionItem.fill,
+                gradient           = oldFill.clone(),
+                colorStops         = gradient.colorStops,
+                newColorStops      = colorStops.filter(x => !chromaticPluginStops.includes(x.stop));
+
+            gradient.colorStops = newColorStops;
+            selection.items[i].fill = gradient;
+        } catch (err) {
+            // Preserve the JS logs though
+            errorCount += 1;
+            console.log(err);
+        }
+    }
+
+    if (errorCount === selection.items.length) {
+        document.body.appendChild(getDialog()).showModal();
+    }
 }
 
 function labGradient(selection) {
